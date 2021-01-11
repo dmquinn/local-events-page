@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg sticky-top navbar-default">
+	<a href="/"> <img class="brand" src="logo.svg" alt="" /></a>
+	<div class="container-fluid">
+		<button
+			class="navbar navbar-toggler"
+			type="button"
+			data-bs-toggle="collapse.show"
+			data-bs-target="#navbarNavAltMarkup"
+			aria-controls="navbarNavAltMarkup"
+			aria-expanded="false"
+			aria-label="Toggle navigation"
+		>
+			<span class="navbar-toggler-icon hamburger"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-link" href="/">Home</a>
+				<a class="nav-link ms-3" href="/events">Upcoming Events</a>
+				<a class="nav-link ms-3" href="/events/new">New Event</a>
+				<a class="nav-link ms-3" href="/community">Community</a>
+			</div>
+			<div class="navbar-nav ml-auto rightLinks">
+				<% if(!currentUser) { console.log("currentUser", currentUser)%>
+				<p><%= currentUser %></p>
+				<a class="nav-link" href="/login">Login</a>
+				<a class="nav-link" href="/register">Register</a>
+
+				<% } else { %>
+				<a class="nav-link" href="/logout">Logout</a>
+				<p class="nav-link">
+					<%=currentUser.username %><img class="profileIcon" src="profile.svg"></img>
+				</p>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</nav>

@@ -1,0 +1,22 @@
+<% layout("layouts/boilerplate") %>
+<section class="vw-100 introSection">
+	<div class="jumbotron jumbotron-fluid homeJumbotron">
+		<div class="container">
+			<h1 class="display-4 upcomingEventsHeader">Upcoming Events</h1>
+		</div>
+	</div>
+</section>
+<section>
+	<% for (let event of events) {%>
+	<div class="card" style="width: 25rem">
+		<img class="card-img-top" src="<%= event.images.url %>" alt="" />
+		<div class="card-body">
+			<h3 href="/events/<%= event._id %> " class="viewButton">
+				<%= event.title %>
+			</h3>
+			<h5 class="card-text Date"><%= event.date %></h5>
+			<h6 class="card-text Type">Event Type: <%= event.type %></h6>
+		</div>
+	</div>
+	<%}%>
+</section>

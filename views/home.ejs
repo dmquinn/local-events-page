@@ -1,0 +1,145 @@
+<% layout("layouts/boilerplate") %>
+<section class="vw-100 introSection">
+	<div class="jumbotron jumbotron-fluid homeJumbotron">
+		<div class="container">
+			<h1 class="display-4 homeHeader">Hello You</h1>
+			<p class="lead">
+				This page was created with the aim to bring Berlin-based
+				musicians, artists and party people together. If you've got a
+				gig, a party, or anything else you would like to advertise,
+				click on "create event". Otherwise get involved in our network
+				of musicians or else see what's on in your keatz this week.
+			</p>
+		</div>
+	</div>
+</section>
+
+<section class="container">
+	<div class="row justify-content-md-center homeRow mt-5">
+		<div class="col-lg-3 col-md-6 homeText">
+			<h5 class="inFocusDate">13/01/2021</h5>
+			<h1 class="inFocus">Track In Focus This Week:</h1>
+		</div>
+		<div class="col-lg-4 col-md-6 offset-0.5 homePlayer">
+			<audio id="audio">
+				<source src="clouds.wav" />
+			</audio>
+			<h5 class="container-fluid artistInfo">
+				Inga Michneviciute & Daniel Murphy - Clouds on Arran - Uplawmoor
+				OST
+			</h5>
+			
+			<div id="continer-fluid seekObjContainer">
+				<div id="seekObj">
+				<div id="percentage"></div>
+				<p id="currentTime">00:00</p>
+				<button id="playAudio"></button>
+			</div>
+			
+		</div>
+	</div>
+</section>
+
+<section class="container interviewsContainer">
+		<div class="container interviews">
+		<h1 class="interviewsh1">Interviews:</h1><h1 class="interviewsh1 Sniff">BEEZER RECORDS</h1> 
+		<h3 class="interviewsh3">What's it like being totally wank?</h3>
+	</div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	(function audioPlay() {
+		"use strict";
+	function $(id) {
+		return document.getElementById(id);
+	}
+	const media = document.getElementById("audio");
+
+	let ui = {
+		play: "playAudio",
+		audio: "audio",
+		percentage: "percentage",
+		seekObj: "seekObj",
+		currentTime: "currentTime",
+	};
+	var playPause = document.querySelector("#playAudio");
+	function togglePlay() {
+		if (media.paused === false) {
+			media.pause();
+			playPause.style.backgroundImage = "url('play.svg')";
+			$(ui.play).classList.remove("pause");
+		} else {
+			media.play();
+			playPause.style.backgroundImage = "url('pause.svg')";
+			$(ui.play).classList.add("pause");
+		}
+	}
+
+	function calculatePercentPlayed() {
+		let percentage = (media.currentTime / media.duration).toFixed(2) * 100;
+		$(ui.percentage).style.width = `${percentage}%`;
+	}
+
+	function calculateCurrentValue(currentTime) {
+		const currentMinute = parseInt(currentTime / 60) % 60;
+		const currentSecondsLong = currentTime % 60;
+		const currentSeconds = currentSecondsLong.toFixed();
+		const currentTimeFormatted = `${
+			currentMinute < 10 ? `0${currentMinute}` : currentMinute
+		}:${currentSeconds < 10 ? `0${currentSeconds}` : currentSeconds}`;
+
+		return currentTimeFormatted;
+	}
+
+	function initProgressBar() {
+		const currentTime = calculateCurrentValue(media.currentTime);
+		$(ui.currentTime).innerHTML = currentTime;
+		$(ui.seekObj).addEventListener("click", seek);
+
+		media.onended = () => {
+			$(ui.play).classList.remove("pause");
+			$(ui.percentage).style.width = 0;
+			$(ui.currentTime).innerHTML = "00:00";
+		};
+
+		function seek(e) {
+			const percent = e.offsetX / this.offsetWidth;
+			media.currentTime = percent * media.duration;
+		}
+
+		calculatePercentPlayed();
+	}
+
+	$(ui.play).addEventListener("click", togglePlay);
+	$(ui.audio).addEventListener("timeupdate", initProgressBar);
+
+	window.onload = function () {
+		var file = document.getElementById("thefile1");
+		var audio = document.getElementById("audio");
+
+		file.onchange = function () {
+			
+
+			var context = new AudioContext();
+			var src = context.createMediaElementSource(audio);
+
+			
+			audio.play();
+			renderFrame();
+		};
+	};
+})();
+
+</script>
+	
+

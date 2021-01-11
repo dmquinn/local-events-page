@@ -1,0 +1,98 @@
+<% layout("layouts/boilerplate") %>
+
+<h1 class="newEvent">Post an Event</h1>
+<div class="d-flex justify-content-center align-items-center">
+	
+		<form 
+			action="/events" 
+			method="POST" 
+			novalidate 
+			class="validated-form" 
+			enctype="multipart/form-data">
+			<div class="col-md-9 offset-6">
+			<div class="valid-feedback">Looks Good</div>
+			<div class="mb-3">
+				<label class="form-label" for="title">Event Type</label>
+				<br>
+				<select name="event[type]" id="event-type">
+					<option value=""></option>
+					<option value="Rave">Rave</option>
+					<option value="Gig">Gig</option>
+					<option value="Exhibition">Exhibition</option>
+					
+				</select>
+			<div class="mb-3">
+				<label class="form-label" for="title">Give your event a title</label>
+			<input
+					class="form-control"
+					type="text"
+					id="title"
+					name="event[title]"
+					required
+				/>
+			<div class="valid-feedback">Looks Good</div>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="date">Date</label>
+				<br>
+				<input type="date" class="date" id="date" name="event[date]" required>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="location">Location</label>
+				<input
+					class="form-control"
+					type="text"
+					id="location"
+					name="event[location]"
+					required
+				/>
+				<div class="valid-feedback">Looks Good</div>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="location">Price</label>
+				<input
+					class="form-control"
+					type="number"
+					id="location"
+					name="event[price]"
+					required
+				/>
+				<div class="valid-feedback">Looks Good</div>
+			</div>
+			<div class="mb-3">
+				<label class="form-label" for="image">Add Images</label>
+				<div class="form-file custom-file">
+					<input
+						type="file"
+						class="form-file-input"
+						id="image"
+						name="image"
+						multiple
+					/>
+					<label class="form-file-label" for="image">
+						<span class="form-file-text custom-file-label"
+							>Choose image(s)...</span
+						>
+						<span class="form-file-button">Browse</span>
+					</label>
+				</div>
+			</div>
+
+			<div class="mb-3">
+				<label class="form-label" for="description">Description</label>
+				<textarea
+					class="form-control"
+					type="text"
+					id="description"
+					name="event[description]"
+					required
+				>
+				</textarea>
+			</div>
+			<div class="mb-3">
+				<button class="btn btn-success">Add event</button>
+			</div>
+		</form>
+</div>
+
+<a href="/events">Back</a>

@@ -1,0 +1,158 @@
+/* N A V B A R */
+.brand {
+	position: relative;
+	left: 70px;
+	visibility: visible;
+	/* right: 70px; */
+	width: 30px;
+	height: auto;
+}
+
+.rightLinks {
+	position: relative;
+	right: 200px;
+}
+.navbar {
+	position: fixed;
+	background-color: #0f0f0f;
+	/* width: 100vw; */
+	display: flex;
+}
+.nav-link {
+	position: relative;
+	font-size: small;
+	left: 90px;
+	text-decoration: none;
+	color: white;
+	font-weight: 600;
+}
+.nav-link:hover {
+	color: rgb(252, 127, 127);
+}
+.profileIcon {
+	position: relative;
+	left: 10px;
+	height: 15px;
+	width: auto;
+	color: white;
+}
+
+/* H O M E P A G E */
+.jumbotron {
+	background-color: #000000 !important;
+	color: white;
+}
+.homeHeader,
+.inFocus,
+.inFocusDate {
+	font-family: "Anton", sans-serif;
+}
+.inFocusDate {
+	color: rgb(233, 92, 92);
+}
+.inFocus {
+	color: rgb(15, 141, 120);
+}
+.lead {
+	width: 60%;
+}
+.homeRow {
+	display: flex;
+	justify-content: center;
+	position: relative;
+	top: 100px;
+}
+.homeText {
+	width: 25%;
+	height: auto;
+}
+.homePlayer {
+	display: inline-block;
+	height: auto;
+	min-height: 270px !important;
+	background-image: url("band.JPG");
+	background-size: cover;
+	/* filter: brightness(80%); */
+}
+.inFocus {
+	font-size: 70px;
+}
+.artistInfo {
+	filter: brightness(100%) drop-shadow(2px 2px 0px black);
+	position: relative;
+	top: 5px;
+	left: 20px;
+	max-width: 80%;
+	font-weight: 800;
+	color: white !important;
+}
+#playAudio {
+	position: relative;
+	-webkit-appearance: none;
+	outline: none;
+	cursor: pointer;
+	border: none;
+	width: 70px;
+	height: 70px;
+	background: url("play.svg") no-repeat center;
+	background-size: contain;
+	top: 50px;
+	display: block;
+	left: auto;
+	right: auto;
+}
+#playAudio:hover {
+	background-color: rgba(241, 241, 241, 0.336);
+	border-radius: 50%;
+}
+#playAudio:active {
+	background-color: rgba(243, 205, 205, 0.219);
+}
+#seekObjContainer {
+	position: relative;
+	display: block;
+	left: auto;
+	right: auto;
+}
+
+#seekObj {
+	position: relative;
+	width: 60%;
+	height: 10px;
+	background-color: #e3e3e3;
+	border: none;
+	border-radius: 4px;
+}
+#percentage {
+	position: absolute;
+	height: 100%;
+	background: rgb(231, 75, 75);
+	border-radius: 50px;
+}
+
+/* I N T E R V I E W S */
+
+.inFocusContainer {
+	position: relative;
+	max-height: 300px;
+}
+
+.interviews {
+	position: relative;
+	top: 290px;
+	color: white;
+	height: 550px;
+	background-image: url("https://images.unsplash.com/photo-1587731556938-38755b4803a6?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=757&q=80");
+	background-size: cover;
+	cursor: pointer;
+}
+.interviews:hover {
+	filter: brightness(80%);
+}
+/* U P C O M I N G */
+
+.upcomingEventsHeader {
+	position: relative;
+	top: 50px;
+	font-family: "Anton", sans-serif;
+}
