@@ -70,7 +70,6 @@ module.exports = function audioPlay() {
 			var files = this.files;
 			audio.src = URL.createObjectURL(files[0]);
 			uploadedFiles.push(files[0]);
-			console.log("array data", uploadedFiles);
 			var fileName = document.querySelector(".fileName");
 			fileName.innerHTML = file.name;
 

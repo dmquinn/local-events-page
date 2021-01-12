@@ -6,17 +6,46 @@
 		</div>
 	</div>
 </section>
-<section>
-	<% for (let event of events) {%>
-	<div class="card" style="width: 25rem">
-		<img class="card-img-top" src="<%= event.images.url %>" alt="" />
-		<div class="card-body">
-			<h3 href="/events/<%= event._id %> " class="viewButton">
-				<%= event.title %>
-			</h3>
-			<h5 class="card-text Date"><%= event.date %></h5>
-			<h6 class="card-text Type">Event Type: <%= event.type %></h6>
+<div class="row mt-5">
+	<section class="col">
+		<% for (let event of events) {%>
+
+		<div class="card offset-lg-1" style="width: 20rem">
+			<img
+				class="card-img-top"
+				src="<%= event.images.url %>"
+				style="height: 18rem"
+				alt=""
+			/>
+			<div class="card-body">
+				<h1 href="/events/<%= event._id %> " class="mb-3 eventTitle">
+					<%= event.title %>
+				</h1>
+				<h5 class="card-text eventDate"><%= event.date %></h5>
+				<p class="card-text Type">Event Type: <%= event.type %></p>
+				<a class="viewEvent" href="/events/<%=event._id%>">View</a>
+			</div>
 		</div>
-	</div>
-	<%}%>
-</section>
+		<%}%>
+	</section>
+	<section class="col">
+		<div
+			id="map"
+			style="width: 500px; height: 300px"
+			class="mt-5 offset-lg--5 mw-100"
+		></div>
+	</section>
+</div>
+
+<script>
+	const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+</script>
+<script>
+	mapboxgl.accessToken = mapToken;
+	const map = new mapboxgl.Map({
+		container: "map",
+		style: "mapbox://styles/mapbox/dark-v10",
+		center: [13.45417, 52.51583],
+		zoom: 12,
+	});
+</script>

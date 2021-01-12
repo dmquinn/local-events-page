@@ -1,0 +1,72 @@
+	<div class="bannerContainer">
+			<img src="<%= event.images.url %>" class="banner" alt="..." />
+			<h5 class="eventTitle"><%=event.title%></h5>
+		</div>
+		<div class="card-body">
+			<h5 class="eventDate"><%=event.date%></h5>
+			<p class="card-text"><%=event.description%></p>
+		</div>
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item text-muted"><%=event.location%></li>
+			<li class="list-group-item">EUR: <%=event.price%></li>
+		</ul>
+		<% if(currentUser && event.author.equals(currentUser._id)) { %>
+
+		<div class="card-body">
+			<a class="editButton" href="/events/<%=event._id%>/edit">EDIT</a>
+			<form
+				class="d-inline"
+				action="/events/<%=event._id%>?_method=DELETE"
+				method="POST"
+			>
+				<button class="deleteButton">DELETE</button>
+            </form>
+            </div>
+			<% } %>
+		
+		<!-- <div class="col-6"> -->
+			<% if(currentUser) { %>
+			<h2>Comments</h2>
+			<br />
+			<form
+				action="/events/<%=event._id%>/comments"
+				class="mb-3 validated-form"
+				method="POST"
+				novalidate
+			>
+				<div class="mb-3">
+					<label for="body" class="form-label">Leave a Comment</label>
+					<textarea
+						class="form-control"
+						name="comment[body]"
+						id="body"
+						cols="30"
+						rows="3"
+						required
+					></textarea>
+					<div class="valid-feedback">Looks Good</div>
+				</div>
+				<button class="btn btn-success">Submit</button>
+			</form>
+			<% } %> <% for(let comment of event.comments) {%>
+			<div class="card mb-3">
+				<div class="card-body">
+					<h6 class="card-subtitle mb-2 text-muted">
+						By <%=comment.author.username%>
+					</h6>
+					<p>Comment: <%= comment.body %></p>
+					<% if(currentUser && comment.author.equals(currentUser._id))
+					{ %>
+					<form
+						action="/events/<%=event._id%>/comments/<%=event._id%>?_method=DELETE"
+						method="POST"
+					>
+						<button class="btn-sm btn-danger">Delete</button>
+					</form>
+					<% } %>
+				</div>
+			</div>
+			<%} %>
+		</div>
+	</div>
+</div>

@@ -4,6 +4,17 @@ const Schema = mongoose.Schema;
 const EventSchema = new Schema({
 	date: String,
 	title: String,
+	geometry: {
+		type: {
+			type: String,
+			enum: ["Point"],
+			required: true,
+		},
+		coordinates: {
+			type: [Number],
+			required: true,
+		},
+	},
 	type: String,
 	price: Number,
 	images: { url: String, filename: String },

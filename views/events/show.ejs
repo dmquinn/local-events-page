@@ -1,37 +1,55 @@
 <% layout("layouts/boilerplate") %>
-<!-- <div class="row mb-3"> -->
-	<!-- <div class="col-6"> -->
-		<div class="bannerContainer">
-			<img src="<%= event.images.url %>" class="banner" alt="..." />
-			<h5 class="eventTitle"><%=event.title%></h5>
+<section class="vw-100 introSection">
+	<div
+		class="jumbotron jumbotron-fluid upcomingJumbotron"
+		style="background-image: url(<%= event.images.url %>)"
+	>
+		<div class="container">
+			<h1 class="display-4 upcomingEventsHeader"><%= event.title %></h1>
 		</div>
-		<div class="card-body">
+	</div>
+</section>
+<section>
+	<div class="col">
+	<div class="card-body offset-lg-1">
+			<img
+				src="<%= event.images.url%>"
+				class="img-fluid"
+				alt=""
+				style="width: 20rem"
+			/>
 			<h5 class="eventDate"><%=event.date%></h5>
-			<% console.log(event.date) %>
 			<p class="card-text"><%=event.description%></p>
 		</div>
-		<ul class="list-group list-group-flush">
-			<li class="list-group-item text-muted"><%=event.location%></li>
+		<ul class="list-group list-group-flush offset-lg-1 w-50">
+			<li class="list-group-item text-muted mt-5"><%=event.location%></li>
 			<li class="list-group-item">EUR: <%=event.price%></li>
 		</ul>
-		<% if(currentUser && event.author.equals(currentUser._id)) { %>
+	</div>
+	</div>
+</section>
+<section class="comments">
+	<% if(currentUser && event.author.equals(currentUser._id)) { %>
 
-		<div class="card-body">
-			<a class="editButton" href="/events/<%=event._id%>/edit">EDIT</a>
-			<form
-				class="d-inline"
-				action="/events/<%=event._id%>?_method=DELETE"
-				method="POST"
-			>
-				<button class="deleteButton">DELETE</button>
-			</form>
-			<% } %>
-		</div>
-		<!-- <div class="col-6"> -->
-			<% if(currentUser) { %>
+	<div class="card-body offset-lg-1">
+		<a class="editButton" href="/events/<%=event._id%>/edit">EDIT</a>
+		<form
+			class="d-inline"
+			action="/events/<%=event._id%>?_method=DELETE"
+			method="POST"
+		>
+			<button class="deleteButton">DELETE</button>
+		</form>
+	</div>
+	<% } %>
+</section>
+
+<section class="comments">
+	<% if(currentUser) { %>
+		<div class="col">
 			<h2>Comments</h2>
-			<br />
-			<form
+			<div class="card-body offset-lg-1">
+				<form
 				action="/events/<%=event._id%>/comments"
 				class="mb-3 validated-form"
 				method="POST"
@@ -51,25 +69,31 @@
 				</div>
 				<button class="btn btn-success">Submit</button>
 			</form>
-			<% } %> <% for(let comment of event.comments) {%>
-			<div class="card mb-3">
-				<div class="card-body">
-					<h6 class="card-subtitle mb-2 text-muted">
-						By <%=comment.author.username%>
-					</h6>
-					<p>Comment: <%= comment.body %></p>
-					<% if(currentUser && comment.author.equals(currentUser._id))
-					{ %>
-					<form
-						action="/events/<%=event._id%>/comments/<%=event._id%>?_method=DELETE"
-						method="POST"
-					>
-						<button class="btn-sm btn-danger">Delete</button>
-					</form>
-					<% } %>
-				</div>
 			</div>
-			<%} %>
 		</div>
-	</div>
-</div>
+		<% } %> 
+</section>
+
+<div id='map' style='width: 400px; height: 300px;'></div>
+
+<script>
+	const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+	const event = <%- JSON.stringify(event) %>;
+</script>
+<script>
+	mapboxgl.accessToken = mapToken;
+const map = new mapboxgl.Map({
+	container: "map",
+	style: "mapbox://styles/mapbox/dark-v10",
+	center: [13.45417, 52.51583],
+	zoom: 12,
+});
+new mapboxgl.Marker()
+	.setLngLat([13.45417, 52.51583])
+	.addTo(map)
+	.setPopup(
+		new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3>${event.title}</h3>`)
+	)
+	.addTo(map);
+
+</script>

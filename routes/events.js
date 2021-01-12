@@ -7,7 +7,9 @@ const ExpressError = require("../utilities/expressError");
 const Event = require("../models/event");
 const { isLoggedIn, isAuthor, validateEvent } = require("../middleware");
 const multer = require("multer");
-
+const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
+const mapBoxToken = process.env.MAPBOX_TOKEN;
+const geoCoder = mbxGeocoding({ accessToken: mapBoxToken });
 const upload = multer({ storage });
 
 router.get(
@@ -24,19 +26,21 @@ router.get("/new", isLoggedIn, (req, res) => {
 router.post(
 	"/",
 	isLoggedIn,
-	upload.array("image"),
-
+	upload.single("image"),
 	// validateEvent,
 	catchAsync(async (req, res, next) => {
+		const geoData = await geoCoder
+			.forwardGeocode({
+				query: req.body.event.location,
+				limit: 1,
+			})
+			.send();
 		const event = new Event(req.body.event);
-		event.images = req.files.map((f) => ({
-			url: f.path,
-			filename: f.filename,
-		}));
+		event.geometry = geoData.body.features[0].geometry;
+		event.images.url = req.file.path;
 		event.author = req.user._id;
-		console.log("eventWhat?", event);
 		await event.save();
-		// req.flash("success", "Successfully made a new campground!");
+		console.log(geoData);
 		res.redirect(`/events/${event._id}`);
 	})
 );
@@ -52,7 +56,6 @@ router.get(
 				},
 			})
 			.populate("author");
-		console.log("event", event);
 		if (!event) {
 			// req.flash("error", "Cannot find that event!");
 			return res.redirect("/events");

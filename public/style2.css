@@ -14,7 +14,7 @@
 }
 .navbar {
 	position: fixed;
-	background-color: #0f0f0f;
+	background-color: #1a1919;
 	/* width: 100vw; */
 	display: flex;
 }
@@ -25,9 +25,11 @@
 	text-decoration: none;
 	color: white;
 	font-weight: 600;
+	transition: 0.2s;
 }
 .nav-link:hover {
 	color: rgb(252, 127, 127);
+	transition: 0.3s;
 }
 .profileIcon {
 	position: relative;
@@ -39,7 +41,7 @@
 
 /* H O M E P A G E */
 .jumbotron {
-	background-color: #000000 !important;
+	background-color: #1a1919 !important;
 	color: white;
 }
 .homeHeader,
@@ -78,7 +80,7 @@
 	font-size: 70px;
 }
 .artistInfo {
-	filter: brightness(100%) drop-shadow(2px 2px 0px black);
+	filter: brightness(100%) drop-shadow(2px 2px 0px 1a1919);
 	position: relative;
 	top: 5px;
 	left: 20px;
@@ -149,10 +151,50 @@
 .interviews:hover {
 	filter: brightness(80%);
 }
+.interviewsh1,
+.interviewsh3 {
+	position: relative;
+	left: 70px;
+	top: 70px;
+
+	font-family: "Anton", sans-serif;
+	filter: brightness(100%) drop-shadow(2px 2px 0px 1a1919);
+}
+.interviews h1 {
+	font-size: 70px;
+}
+
 /* U P C O M I N G */
 
 .upcomingEventsHeader {
 	position: relative;
 	top: 50px;
 	font-family: "Anton", sans-serif;
+	filter: brightness(140%);
 }
+.upcomingJumbotron {
+	filter: brightness(50%);
+}
+.eventTitle,
+.eventDate {
+	font-family: "Anton", sans-serif;
+}
+.eventDate {
+	color: rgb(252, 127, 127);
+}
+.viewEvent {
+	background-color: rgb(15, 141, 120);
+	color: white;
+	font-family: "Anton", sans-serif;
+	padding: 9px;
+	letter-spacing: 1px;
+	border-radius: 4px;
+	transition: 0.2s;
+}
+.viewEvent:hover {
+	background-color: rgb(7, 87, 73);
+	color: rgb(240, 240, 240);
+	text-decoration: none;
+	transition: 0.2s;
+}
+/* S H O W P A G E */
