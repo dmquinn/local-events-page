@@ -13,7 +13,7 @@ module.exportsschema = joi.object({
 		})
 		.required(),
 });
-module.exports.commentsSchema = joi.object({
+module.exports.commentSchema = joi.object({
 	comment: joi
 		.object({
 			body: joi.string().required(),

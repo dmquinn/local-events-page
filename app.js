@@ -16,14 +16,14 @@ const expressError = require("./utilities/expressError");
 const ExpressError = require("./utilities/expressError");
 const AudioPlayer = require("./audioPlayer.js");
 const User = require("./models/user");
-const { eventSchema, commentsSchema } = require("./schemas.js");
+const Comment = require("./models/comments");
+const { eventSchema, commentSchema } = require("./schemas.js");
 const userRoutes = require("./routes/user");
 const passport = require("passport");
 const commentRoutes = require("./routes/comments");
 const multer = require("multer");
 
 const LocalStrategy = require("passport-local");
-const Comment = require("./models/comments");
 
 mongoose.connect("mongodb://localhost:27017/streetMusic", {
 	useNewUrlParser: true,

@@ -19,6 +19,7 @@
 				style="width: 20rem"
 			/>
 			<h5 class="eventDate"><%=event.date%></h5>
+			<h5 class="eventTitleSmall"><%=event.title%></h5>
 			<p class="card-text"><%=event.description%></p>
 		</div>
 		<ul class="list-group list-group-flush offset-lg-1 w-50">
@@ -72,9 +73,20 @@
 			</div>
 		</div>
 		<% } %> 
+		<% for(let comment of event.comments) {%>
+			<div class="card mb-3">
+				<div class="card-body">
+			
+  				<h6 class="card-subtitle mb-2 text-muted">By <%=comment.author.username%></h6>
+					<p>Comment: <%= comment.body %></p>
+					<!--  -->
+				</div>
+			</div>
+			<%} %>
 </section>
 
 <div id='map' style='width: 400px; height: 300px;'></div>
+
 
 <script>
 	const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
@@ -85,11 +97,11 @@
 const map = new mapboxgl.Map({
 	container: "map",
 	style: "mapbox://styles/mapbox/dark-v10",
-	center: [13.45417, 52.51583],
+	center: [event.geometry.coordinates],
 	zoom: 12,
 });
 new mapboxgl.Marker()
-	.setLngLat([13.45417, 52.51583])
+	.setLngLat([event.geometry.coordinates])
 	.addTo(map)
 	.setPopup(
 		new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3>${event.title}</h3>`)

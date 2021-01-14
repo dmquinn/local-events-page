@@ -7,7 +7,12 @@
 	width: 30px;
 	height: auto;
 }
-
+.navbar-toggler {
+	background-image: url("hamburger.svg");
+	z-index: 5;
+	color: rgb(0, 0, 0);
+	/* filter: drop-shadow(2px 2px 2px white); */
+}
 .rightLinks {
 	position: relative;
 	right: 200px;
@@ -41,18 +46,20 @@
 
 /* H O M E P A G E */
 .jumbotron {
-	background-color: #1a1919 !important;
+	background-color: #1b1b1b !important;
 	color: white;
 }
 .homeHeader,
 .inFocus,
-.inFocusDate {
+.inFocusDate,
+.eventTitleSmall {
 	font-family: "Anton", sans-serif;
 }
 .inFocusDate {
 	color: rgb(233, 92, 92);
 }
-.inFocus {
+.inFocus,
+.eventTitleSmall {
 	color: rgb(15, 141, 120);
 }
 .lead {
@@ -161,7 +168,7 @@
 	filter: brightness(100%) drop-shadow(2px 2px 0px 1a1919);
 }
 .interviews h1 {
-	font-size: 70px;
+	/* font-size: 70px; */
 }
 
 /* U P C O M I N G */

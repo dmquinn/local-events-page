@@ -48,25 +48,9 @@
 				</div>
 				<button class="btn btn-success">Submit</button>
 			</form>
-			<% } %> <% for(let comment of event.comments) {%>
-			<div class="card mb-3">
-				<div class="card-body">
-					<h6 class="card-subtitle mb-2 text-muted">
-						By <%=comment.author.username%>
-					</h6>
-					<p>Comment: <%= comment.body %></p>
-					<% if(currentUser && comment.author.equals(currentUser._id))
-					{ %>
-					<form
-						action="/events/<%=event._id%>/comments/<%=event._id%>?_method=DELETE"
-						method="POST"
-					>
-						<button class="btn-sm btn-danger">Delete</button>
-					</form>
-					<% } %>
-				</div>
-			</div>
-			<%} %>
+			<% for(let comment of event.comments) {%>
+			
+			<% } %>
 		</div>
 	</div>
 </div>
