@@ -21,11 +21,13 @@
 				<h1 href="/events/<%= event._id %> " class="mb-3 eventTitle">
 					<%= event.title %>
 				</h1>
-				<h5 class="card-text eventDate"><%= event.date %></h5>
+				<script></script>
+				<h5 class="card-text eventDate"><%= event.date;%></h5>
 				<p class="card-text Type">Event Type: <%= event.type %></p>
 				<a class="viewEvent" href="/events/<%=event._id%>">View</a>
 			</div>
 		</div>
+
 		<%}%>
 	</section>
 	<section class="col">
@@ -34,6 +36,23 @@
 			style="width: 500px; height: 300px"
 			class="mt-5 offset-lg--5 mw-100"
 		></div>
+		<br /><br />
+		<label for="event-date">Search By Date:</label>
+		<form action="/eventByDate/" class="dateInput" method="POST">
+			<input type="date" id="date" name="date" />
+			<button>Submit</button>
+		</form>
+		<script>
+			document
+				.querySelector(".dateInput")
+				.addEventListener("submit", async function (event) {
+					console.log("etagrger", event.target.date.value);
+					// event.preventDefault();
+					const date = event.target.date.value;
+					const result = await axios.get(`/eventByDate/${date}`);
+					console.log("result:", result);
+				});
+		</script>
 	</section>
 </div>
 

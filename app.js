@@ -22,7 +22,7 @@ const userRoutes = require("./routes/user");
 const passport = require("passport");
 const commentRoutes = require("./routes/comments");
 const multer = require("multer");
-
+const parser = require("body-parser");
 const LocalStrategy = require("passport-local");
 
 mongoose.connect("mongodb://localhost:27017/streetMusic", {
@@ -46,6 +46,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(parser.urlencoded({ extended: false }));
 
 const sessionConfig = {
 	secret: "thisworks",
@@ -75,9 +76,48 @@ app.use("/", userRoutes);
 app.use("/events", eventRoutes);
 app.use("/events/:id/comments", commentRoutes);
 
+// app.get("/eventByDate/:date", async (req, res) => {
+// 	console.log("I am getting a req", req.params.date);
+// 	const d = req.params.date;
+// 	const data = await Event.find({ date: d });
+// 	console.log("data", data);
+// 	if (data) {
+// 		req.query = d;
+// 		res.render(`./events/eventByDate`, { data });
+// 		// res.redirect(`/eventByDate/:date`);
+// 	} else {
+// 		console.log("THERE IS NO DATA");
+// 	}
+// });
+app.post(
+	"/",
+	catchAsync(async (req, res, next) => {
+		const d = req.params.date;
+		const data = await Event.find({ date: d });
+		req.query = d;
+		console.log("THERE IS NO DATA");
+		res.render(`./events/eventByDate`, { data });
+		res.redirect(`/eventByDate/:date`);
+	})
+);
+
+app.post(
+	"/eventByDate",
+	catchAsync(async (req, res, next) => {
+		const d = req.body.date;
+		const data = await Event.find({ date: d });
+		console.log("d", d, data);
+		// if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400);
+		// const campground = new Campground(req.body.campground);
+		// await campground.save();
+		res.render(`./events/eventByDate`, { data });
+		res.redirect(`/eventByDate/${d}`);
+	})
+);
 app.get("/", (req, res) => {
 	res.render("home");
 });
+
 app.get("/community", (req, res) => {
 	res.render("community");
 });
