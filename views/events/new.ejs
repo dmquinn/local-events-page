@@ -1,6 +1,9 @@
 <% layout("layouts/boilerplate") %>
-
-<h1 class="newEvent">Post an Event</h1>
+<div class="jumbotron jumbotron-fluid homeJumbotron">
+		<div class="container">
+			<h1 class="display-4 upcomingEventsHeader">Post An Event</h1>
+		</div>
+	</div>
 <div class="d-flex justify-content-center align-items-center">
 	
 		<form 
@@ -9,7 +12,7 @@
 			novalidate 
 			class="validated-form" 
 			enctype="multipart/form-data">
-			<div class="col-md-9 offset-6">
+			<div class="col-md-9 offset-lg-6">
 			<div class="valid-feedback">Looks Good</div>
 			<div class="mb-3">
 				<label class="form-label" for="title">Event Type</label>
@@ -73,7 +76,7 @@
 						<span class="form-file-text custom-file-label"
 							>Choose image...</span
 						>
-						<span class="form-file-button">Browse</span>
+						
 					</label>
 				</div>
 			</div>
@@ -90,7 +93,7 @@
 				</textarea>
 			</div>
 			<div class="mb-3">
-				<button class="btn btn-success">Add event</button>
+				<button class="btn login">Add event</button>
 			</div>
 		</form>
 </div>

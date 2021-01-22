@@ -1,8 +1,10 @@
+// const event = require("../models/event");
+
 mapboxgl.accessToken = mapToken;
 const map = new mapboxgl.Map({
 	container: "map",
 	style: "mapbox://styles/mapbox/dark-v10",
-	center: [event.geometry.coordinates],
+	center: event.geometry.coordinates,
 	zoom: 4,
 });
 new mapboxgl.Marker()

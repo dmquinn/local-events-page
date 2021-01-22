@@ -2,21 +2,39 @@
 <section class="vw-100 introSection">
 	<div class="jumbotron jumbotron-fluid homeJumbotron">
 		<div class="container">
-			<h1 class="display-4 upcomingEventsHeader">Upcoming Events</h1>
+			<h1 class="display-4 upcomingEventsHeader">
+				<%= user.username %>
+			</h1>
 		</div>
 	</div>
 </section>
-<div class="row mt-5">
-	<section class="col">
-		<% for (let event of events) {%>
+<section class="container">
+	<div class="row">
+		<div class="col">
 		<div class="card offset-lg-1" style="width: 20rem">
 			<img
 				class="card-img-top"
-				src="<%= event.images.url %>"
-				style="height: 18rem"
+				src="<%= user.images.url %>"
+				style="height: 20rem"
 				alt=""
 			/>
-			<div class="card-body showCard">
+	</div>
+	</div>
+	<div class="col">
+		<h1>HEAR <%=user.username %> </h1>
+		<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/154567543&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
+	</div>
+</section>
+<% for (let event of events) {%>
+	<% if(event.author.equals(user._id)) { %> 
+		<!-- <div class="card offset-lg-1" style="width: 10rem">
+			<img
+				class="card-img-top"
+				src="<%= event.images.url %>"
+				style="height: 8rem"
+				alt=""
+			/> -->
+			<!-- <div class="card-body showCard">
 				<h1 href="/events/<%= event._id %> " class="mb-3 eventTitle">
 					<%= event.title %>
 				</h1>
@@ -44,10 +62,10 @@
 					></i>
 				</a>
 			</div>
-		</div>
-
+		</div> -->
+<% } %> 
 		<%}%>
-	</section>
+	<!-- </section>
 	<section class="col mr-5">
 		<label for="event-date" class="searchByDate">Search By Date:</label>
 		<form action="/eventByDate/" class="dateInput" method="POST">
@@ -76,4 +94,5 @@
 	const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
 	const events = {features: <%- JSON.stringify(events) %>};
 </script>
-<script src="/clusterMap.js"></script>
+<script src="/clusterMap.js"></script> -->
+

@@ -1,2 +1,62 @@
-<% layout("layouts/boilerplate") %> <% for (let event of data) {%> <% if(data) {
-%>
+<% layout("layouts/boilerplate") %> <% for (let event of data) {%> <% if
+(data){%>
+<section class="vw-100 introSection">
+	<div class="jumbotron jumbotron-fluid homeJumbotron">
+		<div class="container">
+			<h1 class="display-4 upcomingEventsHeader"><%= event.date%></h1>
+		</div>
+	</div>
+</section>
+<div class="row mt-5">
+	<section class="col">
+		<div class="card offset-lg-1" style="width: 20rem">
+			<img
+				class="card-img-top"
+				src="<%= event.images.url %>"
+				style="height: 18rem"
+				alt=""
+			/>
+			<div class="card-body">
+				<h1 href="/events/<%= event._id %> " class="mb-3 eventTitle">
+					<%= event.title %>
+				</h1>
+				<p class="card-text Type">Event Type: <%= event.type %></p>
+				<a class="viewEvent" href="/events/<%=event._id%>">View</a>
+			</div>
+		</div>
+
+		<%}%>
+	</section>
+	<section class="col">
+		<div
+			id="map"
+			style="width: 500px; height: 300px"
+			class="mt-5 offset-lg--5 mw-100"
+		></div>
+		<br /><br />
+
+		<script>
+			document
+				.querySelector(".dateInput")
+				.addEventListener("submit", async function (event) {
+					const date = event.target.date.value;
+					const result = await axios.get(`/eventByDate/${date}`);
+				});
+		</script>
+	</section>
+</div>
+
+<%} %>
+
+<script>
+	const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
+</script>
+<script>
+	mapboxgl.accessToken = mapToken;
+	const map = new mapboxgl.Map({
+		container: "map",
+		style: "mapbox://styles/mapbox/dark-v10",
+		center: [13.45417, 52.51583],
+		zoom: 12,
+	});
+</script>

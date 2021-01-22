@@ -1,4 +1,35 @@
 <% layout("layouts/boilerplate") %>
+<section class="vw-100 introSection">
+	<div class="jumbotron jumbotron-fluid homeJumbotron">
+		<div class="container">
+			<h1 class="display-4 upcomingEventsHeader">Community</h1>
+		</div>
+	</div>
+	<% if(!currentUser) { %> 
+	<a href="/register"><button class="offset-lg-1 Submit">JOIN THE COMMUNITY</button></a>
+	<% } %> 
+</section>
+<section style="background-color: black">
+<div class="row mt-5">
+	<section class="row offset-lg-1 mr-lg-4">
+		<% for (let user of users) {%>
+		<div class="communityCard ml-5 mt-5 offset-lg-1 " style="width: 10rem">
+			 <a href="/community/<%= user._id %> "><img
+				class="card-img-top userImage"
+				src="<%= user.images.url %>"
+				style="height: 10rem; width: 10rem;"
+				alt=""
+			/></a>
+			<div class="card-body">
+				
+				<p class="card-text text-muted Type">
+					 <%=user.username %>
+				</p>
+				
+			</div>
+		</div>
 
-<br /><br /><br /><br />
-<h1 class="communityHeader">COMMUNITY</h1>
+		<%}%>
+	</div>
+	</section>
+

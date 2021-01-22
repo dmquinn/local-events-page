@@ -1,6 +1,6 @@
 <% layout("layouts/boilerplate") %>
 
-<h1>Register</h1>
+<h1 class="loginRegister">Register</h1>
 <div class="d-flex justify-content-center align-items-center">
 	<div class="col-md-4">
 		<form
@@ -8,6 +8,8 @@
 			method="POST"
 			class="validated-form"
 			novalidate
+			class="validated-form"
+			enctype="multipart/form-data"
 		>
 			<div class="mb-3">
 				<label class="form-label" for="username">Username</label>
@@ -42,7 +44,28 @@
 				/>
 				<div class="valid-feedback">Looks Good</div>
 			</div>
-			<button class="btn btn-success">Submit</button>
+			<div class="mb-3">
+				<label class="form-label" for="image">Add User Image</label>
+				<div class="form-file custom-file">
+					<input
+						type="file"
+						class="form-file-input"
+						id="image"
+						name="image"
+					/>
+					<label class="form-file-label" for="image">
+						<span
+							class="form-file-text custom-file-label"
+							style="color: white"
+							>Choose image(s)...</span
+						>
+						<span class="form-file-button" style="color: white"
+							>Browse</span
+						>
+					</label>
+				</div>
+			</div>
+			<button class="btn login">Submit</button>
 		</form>
 	</div>
 </div>

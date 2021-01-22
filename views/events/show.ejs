@@ -1,4 +1,5 @@
 <% layout("layouts/boilerplate") %>
+
 <section class="vw-100 introSection">
 	<div
 		class="jumbotron jumbotron-fluid upcomingJumbotron"
@@ -9,9 +10,9 @@
 		</div>
 	</div>
 </section>
-<section>
-	<div class="col">
-	<div class="card-body offset-lg-1">
+<div class="row mt-5">
+	<section class="col mt-lg-5 ml-lg-5">
+		<div class="card-body offset-lg-1">
 			<img
 				src="<%= event.images.url%>"
 				class="img-fluid"
@@ -26,87 +27,101 @@
 			<li class="list-group-item text-muted mt-5"><%=event.location%></li>
 			<li class="list-group-item">EUR: <%=event.price%></li>
 		</ul>
-	</div>
-	</div>
-</section>
-<section class="comments">
-	<% if(currentUser && event.author.equals(currentUser._id)) { %>
 
-	<div class="card-body offset-lg-1">
-		<a class="editButton" href="/events/<%=event._id%>/edit">EDIT</a>
-		<form
-			class="d-inline"
-			action="/events/<%=event._id%>?_method=DELETE"
-			method="POST"
-		>
-			<button class="deleteButton">DELETE</button>
-		</form>
-	</div>
-	<% } %>
-</section>
+		<% if(currentUser && event.author.equals(currentUser._id)) { %>
 
-<section class="comments">
-	<% if(currentUser) { %>
-		<div class="col">
-			<h2>Comments</h2>
-			<div class="card-body offset-lg-1">
-				<form
-				action="/events/<%=event._id%>/comments"
-				class="mb-3 validated-form"
+		<div class="card-body offset-lg-1">
+			<a class="editButton" href="/events/<%=event._id%>/edit">EDIT</a>
+			<form
+				class="d-inline"
+				action="/events/<%=event._id%>?_method=DELETE"
 				method="POST"
-				novalidate
 			>
-				<div class="mb-3">
-					<label for="body" class="form-label">Leave a Comment</label>
-					<textarea
-						class="form-control"
-						name="comment[body]"
-						id="body"
-						cols="30"
-						rows="3"
-						required
-					></textarea>
-					<div class="valid-feedback">Looks Good</div>
-				</div>
-				<button class="btn btn-success">Submit</button>
+				<button class="deleteButton">DELETE</button>
 			</form>
-			</div>
 		</div>
-		<% } %> 
-		<% for(let comment of event.comments) {%>
+		<% } %>
+		<div
+			id="map"
+			style="width: 400px; height: 300px"
+			class="mw-100 offset-lg-1"
+		></div>
+	</section>
+
+	<section class="col mt-lg-5 ml-lg-5">
+		<div class="">
+			<% if(currentUser) { %>
+			<div class="col">
+				<h2 class="commentsHeading">Comments</h2>
+				<div class="card-body offset-lg-1">
+					<form
+						action="/events/<%=event._id%>/comments"
+						class="mb-3 validated-form"
+						method="POST"
+						novalidate
+					>
+						<div class="mb-3">
+							<label for="body" class="form-label"
+								>Leave a Comment</label
+							>
+							<textarea
+								class="form-control"
+								name="comment[body]"
+								id="body"
+								cols="30"
+								rows="3"
+								required
+							></textarea>
+							<div class="valid-feedback">Looks Good</div>
+						</div>
+						<button class="btn Submit">Submit</button>
+					</form>
+				</div>
+			</div>
 			<div class="card mb-3">
+				<% } %> <% for(let comment of event.comments) {%>
+
 				<div class="card-body">
-			
-  				<h6 class="card-subtitle mb-2 text-muted">By <%=comment.author.username%></h6>
-					<p>Comment: <%= comment.body %></p>
-					<!--  -->
+					<h6 class="card-subtitle mb-2 text-muted">
+						<%=comment.author.username%>
+					</h6>
+					<p><%= comment.body %></p>
+					<% if(currentUser && comment.author.equals(currentUser._id))
+					{ %>
+					<form
+						action="/events/<%=event._id%>/comments/<%=comment._id%>?_method=DELETE"
+						method="POST"
+					>
+						<button class="btn-sm deleteButton">Delete</button>
+					</form>
+					<% } %>
 				</div>
 			</div>
 			<%} %>
-</section>
-
-<div id='map' style='width: 400px; height: 300px;'></div>
-
+		</div>
+	</section>
+</div>
 
 <script>
-	const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
+	const mapToken = "<%-process.env.MAPBOX_TOKEN%>";
 	const event = <%- JSON.stringify(event) %>;
 </script>
 <script>
 	mapboxgl.accessToken = mapToken;
-const map = new mapboxgl.Map({
-	container: "map",
-	style: "mapbox://styles/mapbox/dark-v10",
-	center: event.geometry.coordinates,
-	zoom: 12,
-});
-new mapboxgl.Marker()
-	.setLngLat(event.geometry.coordinates)
-	.addTo(map)
-	.setPopup(
-		new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3>${event.title}</h3>`)
-	)
-	console.log("event.geometry...", [event.geometry.coordinates] )
-	.addTo(map);
-
+	const map = new mapboxgl.Map({
+		container: "map",
+		style: "mapbox://styles/mapbox/dark-v10",
+		center: event.geometry.coordinates,
+		zoom: 12,
+	});
+	new mapboxgl.Marker()
+		.setLngLat(event.geometry.coordinates)
+		.addTo(map)
+		.setPopup(
+			new mapboxgl.Popup({ offset: 25 }).setHTML(
+				`<h3>${event.title}</h3>`
+			)
+		)
+		.addTo(map);
 </script>
+<script src="clusterMap.js"></script>
