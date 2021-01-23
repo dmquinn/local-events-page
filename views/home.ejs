@@ -2,7 +2,7 @@
 <section class="vw-100 introSection">
 	<div class="jumbotron jumbotron-fluid homeJumbotron">
 		<div class="container">
-			<h1 class="display-1 homeHeader">BUSCKR</h1>
+			<h1 class="display-1 homeHeader">BSCKR</h1>
 			<p class="introText">
 				This page was created with the aim to bring Berlin-based
 				musicians, artists and party people together. If you've got a
@@ -17,26 +17,12 @@
 <section class="container">
 	<div class="row justify-content-md-center homeRow">
 		<div class="col-lg-3 col-md-6 homeText">
-			<h5 class="inFocusDate">13/01/2021</h5>
-			<h1 class="inFocus">TRACK IN FOCUS THIS WEEK</h1>
+			 <h3 class="inFocusDate"><%= new Date().getDate()%>/<%= new Date().getFullYear()%></h3>
+			<h1 class="inFocus">TRACKS IN FOCUS THIS WEEK</h1>
 		</div>
 		<div class="col-lg-4 col-md-6 offset-0.5">
-			<div class="homePlayer col w-125">
-			<audio id="audio">
-				<source src="clouds.wav" />
-			</audio>
-			<h5 class="container-fluid artistInfo">
-				Inga Michneviciute & Daniel Murphy - Clouds on Arran - Uplawmoor
-				OST
-			</h5>
-			
-			<div id="seekObjContainer mt-5">
-					<button id="playAudio"></button>
-				<div id="seekObj">
-				<div id="percentage"></div>
-				<p id="currentTime">00:00</p>
-			
-			</div>
+			<iframe width="100%" height="400" scrolling="yes" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/856328635&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href=" " title="SumoEnvy" target="_blank" style="color: #cccccc; text-decoration: none;">SumoEnvy</a> · <a href="https://soundcloud.com/skeletonstick/stress-eater" title="Stress Eater" target="_blank" style="color: #cccccc; text-decoration: none;">Stress Eater</a></div>	
+
 			</div>
 		</div>
 	</div>
@@ -55,7 +41,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-4 mt-5">
 				<div class="box boxThree"></div>
-				<h1 class="int">Gay Stuff</h1>
+				<h1 class="int">Behind the Curtain</h1>
 			</div>
 		</div>
 	</div>
@@ -71,89 +57,4 @@
 
 
 
-<script>
-	(function audioPlay() {
-		"use strict";
-	function $(id) {
-		return document.getElementById(id);
-	}
-	const media = document.getElementById("audio");
-
-	let ui = {
-		play: "playAudio",
-		audio: "audio",
-		percentage: "percentage",
-		seekObj: "seekObj",
-		currentTime: "currentTime",
-	};
-	var playPause = document.querySelector("#playAudio");
-	function togglePlay() {
-		if (media.paused === false) {
-			media.pause();
-			playPause.style.backgroundImage = "url('play.svg')";
-			$(ui.play).classList.remove("pause");
-		} else {
-			media.play();
-			playPause.style.backgroundImage = "url('pause.svg')";
-			$(ui.play).classList.add("pause");
-		}
-	}
-
-	function calculatePercentPlayed() {
-		let percentage = (media.currentTime / media.duration).toFixed(2) * 100;
-		$(ui.percentage).style.width = `${percentage}%`;
-	}
-
-	function calculateCurrentValue(currentTime) {
-		const currentMinute = parseInt(currentTime / 60) % 60;
-		const currentSecondsLong = currentTime % 60;
-		const currentSeconds = currentSecondsLong.toFixed();
-		const currentTimeFormatted = `${
-			currentMinute < 10 ? `0${currentMinute}` : currentMinute
-		}:${currentSeconds < 10 ? `0${currentSeconds}` : currentSeconds}`;
-
-		return currentTimeFormatted;
-	}
-
-	function initProgressBar() {
-		const currentTime = calculateCurrentValue(media.currentTime);
-		$(ui.currentTime).innerHTML = currentTime;
-		$(ui.seekObj).addEventListener("click", seek);
-
-		media.onended = () => {
-			$(ui.play).classList.remove("pause");
-			$(ui.percentage).style.width = 0;
-			$(ui.currentTime).innerHTML = "00:00";
-		};
-
-		function seek(e) {
-			const percent = e.offsetX / this.offsetWidth;
-			media.currentTime = percent * media.duration;
-		}
-
-		calculatePercentPlayed();
-	}
-
-	$(ui.play).addEventListener("click", togglePlay);
-	$(ui.audio).addEventListener("timeupdate", initProgressBar);
-
-	window.onload = function () {
-		var file = document.getElementById("thefile1");
-		var audio = document.getElementById("audio");
-
-		file.onchange = function () {
-			
-
-			var context = new AudioContext();
-			var src = context.createMediaElementSource(audio);
-
-			
-			audio.play();
-			renderFrame();
-		};
-	};
-})();
-
-</script>
-	
 

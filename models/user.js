@@ -7,12 +7,18 @@ const UserSchema = new Schema({
 	email: {
 		type: String,
 		required: true,
-		uniqie: true,
+		unique: true,
 	},
 	username: {
 		type: String,
 		required: true,
-		uniqie: true,
+		unique: true,
+	},
+	description: {
+		type: String,
+	},
+	soundcloudLink: {
+		type: String,
 	},
 });
 UserSchema.plugin(passportLocalMongoose);

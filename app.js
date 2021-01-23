@@ -14,7 +14,6 @@ const eventRoutes = require("./routes/events");
 const session = require("express-session");
 const expressError = require("./utilities/expressError");
 const ExpressError = require("./utilities/expressError");
-const AudioPlayer = require("./audioPlayer.js");
 const User = require("./models/user");
 const Comment = require("./models/comments");
 const { eventSchema, commentSchema } = require("./schemas.js");

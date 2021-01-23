@@ -1,0 +1,43 @@
+<% layout("layouts/boilerplate") %>
+
+<h1 class="addDescription">Edit</h1>
+<div class="d-flex justify-content-center align-items-center">
+	<div class="col-md-4">
+		<form
+			action="/addInfo/<%=id %>"
+			method="POST"
+			class="validated-form"
+			novalidate
+		>
+			<div class="mb-3">
+				<label class="form-label" for="description"
+					>Tell us a bit about the music you make</label
+				>
+
+				<textarea
+					class="form-control"
+					name="description"
+					id="description"
+					cols="60"
+					rows="5"
+				></textarea>
+				<div class="valid-feedback">Looks Good</div>
+			</div>
+
+			<div class="mb-3">
+				<label class="form-label" for="soundcloudLink"
+					>Add a link to your soundcloud(optional)</label
+				>
+				<input
+					class="form-control"
+					type="text"
+					id="soundcloudLink"
+					name="soundcloudLink"
+					required
+				/>
+				<div class="valid-feedback">Looks Good</div>
+			</div>
+			<button class="btn Submit">Submit</button>
+		</form>
+	</div>
+</div>

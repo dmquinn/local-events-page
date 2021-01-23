@@ -8,12 +8,18 @@
 		</div>
 	</div>
 </section>
+	<% if(currentUser.equals(user._id)) { %>
+<div class="flex-row-reverse">
+	<a href="/addInfo/<%=user._id %> "><i class="fa fa-edit fa-3x d-flex justify-content-end mr-lg-5"
+		aria-hidden="true"></i></a>
+</div>
+<% } %> 
 <section class="container">
-	<div class="row">
+	<div class="row mt-5">
 		<div class="col">
 		<div class="card offset-lg-1" style="width: 20rem">
 			<img
-				class="card-img-top"
+				class="card-img-top profileImage"
 				src="<%= user.images.url %>"
 				style="height: 20rem"
 				alt=""
@@ -21,78 +27,51 @@
 	</div>
 	</div>
 	<div class="col">
-		<h1>HEAR <%=user.username %> </h1>
-		<iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/154567543&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true"></iframe>
-	</div>
-</section>
+		<h1 class="userHeader">HEAR <%=user.username %> </h1>
+		<% if(currentUser.equals(user._id)) { %>
+		<a href="/addInfo/<%=user._id %> "><h6>Link to your soundcloud</h6></a>
+		<% } %> 
+	<iframe width="100%" height="100" scrolling="yes" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=<%=user.soundcloudLink %>"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href=" " title="SumoEnvy" target="_blank" style="color: #cccccc; text-decoration: none;"></a> · <a href="https://soundcloud.com/skeletonstick/stress-eater" title="Stress Eater" target="_blank" style="color: #cccccc; text-decoration: none;"></a></div>	
+<% if(!user.description) {%> 
+	<h6 class="mt-5">No description added yet</h6>
+	<% } else { %> 
+<h6 class="mt-5 userDescription"><%=user.description %> </h6>
+		<% } %> 
+
+</section> 
+<div class="section mt-5" style="background-color: black">
+	<h4 class="offset-lg-5 int" style="color: white"><%=user.username %>'s events</h4> 
 <% for (let event of events) {%>
 	<% if(event.author.equals(user._id)) { %> 
-		<!-- <div class="card offset-lg-1" style="width: 10rem">
+	<div class="col">
+					
+		<div class="offset-lg-1" style="width: 8rem">
 			<img
 				class="card-img-top"
 				src="<%= event.images.url %>"
 				style="height: 8rem"
 				alt=""
-			/> -->
-			<!-- <div class="card-body showCard">
-				<h1 href="/events/<%= event._id %> " class="mb-3 eventTitle">
-					<%= event.title %>
-				</h1>
+			/>
+			<div class="card-body smallCard">
+				<h3 href="/events/<%= event._id %> " style="color: white" class="mb-3 eventTitle">
+					<%= event.title %> 
+				</h3>
 				<script></script>
 				<h5 class="card-text eventDate"><%= event.date;%></h5>
-				<p class="card-text text-muted Type">
-					Event Type: <%= event.type %>
-				</p>
+				
 				<a class="viewEvent" href="/events/<%=event._id%>">View</a>
-				<a
-					href="https://www.facebook.com/sharer/sharer.php?u=example.org"
-					target="_blank"
-				>
-					<i
-						class="fa fa-facebook fbIcon d-flex justify-content-end"
-						aria-hidden="true"
-					></i>
-					<a
-					href="https://www.facebook.com/sharer/sharer.php?u=example.org"
-					target="_blank"
-				>
-					<i
-						class="fa fa-twitter twitterIcon d-flex justify-content-end"
-						aria-hidden="true"
-					></i>
+				
 				</a>
 			</div>
-		</div> -->
-<% } %> 
+		</div>
+	</div>
+
 		<%}%>
-	<!-- </section>
-	<section class="col mr-5">
-		<label for="event-date" class="searchByDate">Search By Date:</label>
-		<form action="/eventByDate/" class="dateInput" method="POST">
-			<input type="date" id="date" name="date" />
-			<button class="dateSubmit mt-3">Submit</button>
-		</form>
-		<div
-			id="map"
-			style="width: 500px; height: 400px"
-			class="mt-5 offset-lg--5 mw-100"
-		></div>
-		<br /><br />
+			<% } %> 
+		
 
-		<script>
-			document
-				.querySelector(".dateInput")
-				.addEventListener("submit", async function (event) {
-					const date = event.target.date.value;
-					const result = await axios.get(`/eventByDate/${date}`);
-				});
-		</script>
-	</section>
-</div>
+	
+		
 
-<script>
-	const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
-	const events = {features: <%- JSON.stringify(events) %>};
-</script>
-<script src="/clusterMap.js"></script> -->
+
 

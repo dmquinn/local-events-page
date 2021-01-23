@@ -33,7 +33,7 @@ main {
 
 .navbar {
 	position: fixed;
-	background-color: #1a1919;
+	background-color: #202020;
 	/* width: 100vw; */
 	display: flex;
 }
@@ -78,7 +78,7 @@ main {
 .commentsHeading,
 .int,
 .loginRegister {
-	font-family: "Big Shoulders Text", cursive;
+	font-family: "Anton", sans-serif;
 	opacity: 90%;
 }
 .inFocusDate {
@@ -102,69 +102,9 @@ main {
 	width: 25%;
 	height: auto;
 }
-.homePlayer {
-	display: inline-block;
-	height: auto;
-	min-height: 370px !important;
-	background-image: url("https://images.unsplash.com/photo-1553212362-0fe044d06762?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=424&q=80");
-	background-size: cover;
-}
+
 .inFocus {
 	font-size: 70px;
-}
-.artistInfo {
-	filter: brightness(100%) drop-shadow(2px 2px 0px 1a1919);
-	position: relative;
-	top: 5px;
-	left: 20px;
-	max-width: 80%;
-	font-weight: 800;
-	color: white !important;
-}
-#playAudio {
-	position: relative;
-	-webkit-appearance: none;
-	outline: none;
-	cursor: pointer;
-	border: none;
-	width: 70px;
-	height: 70px;
-	background: url("play.svg") no-repeat center;
-	background-size: contain;
-	top: 150px;
-	display: block;
-	left: auto;
-	right: auto;
-}
-#playAudio:hover {
-	background-color: rgba(241, 241, 241, 0.336);
-	border-radius: 50%;
-}
-#playAudio:active {
-	background-color: rgba(243, 205, 205, 0.219);
-}
-
-#seekObj {
-	position: relative;
-	top: 110px;
-	left: 90px;
-	width: 60%;
-	height: 10px;
-	background-color: #e3e3e3;
-	border: none;
-	border-radius: 4px;
-}
-#percentage {
-	position: absolute;
-	height: 100%;
-	background: rgb(231, 75, 75);
-	border-radius: 50px;
-}
-#currentTime {
-	position: relative;
-	top: 7px;
-	color: white;
-	font-family: "Big Shoulders Text", cursive;
 }
 
 /* I N T E R V I E W S */
@@ -215,7 +155,7 @@ main {
 .upcomingEventsHeader {
 	position: relative;
 	top: 50px;
-	font-family: "Big Shoulders Text", cursive;
+	font-family: "Anton", sans-serif;
 	filter: brightness(140%);
 }
 .upcomingJumbotron {
@@ -225,7 +165,7 @@ main {
 }
 .eventTitle,
 .eventDate {
-	font-family: "Big Shoulders Text", cursive;
+	font-family: "Anton", sans-serif;
 }
 .eventDate {
 	color: rgb(252, 127, 127);
@@ -237,7 +177,7 @@ main {
 	background-color: rgb(15, 141, 120);
 	color: white;
 	border: none;
-	font-family: "Big Shoulders Text", cursive;
+	font-family: "Anton", sans-serif;
 	padding: 9px;
 	letter-spacing: 1px;
 	border-radius: 4px;
@@ -290,7 +230,7 @@ input[type="date"]:focus {
 	border: none;
 }
 .searchByDate {
-	font-family: "Big Shoulders Text", cursive;
+	font-family: "Anton", sans-serif;
 }
 
 /* S H O W P A G E */
@@ -306,7 +246,7 @@ input[type="date"]:focus {
 	background-color: rgb(228, 81, 81);
 	color: white;
 	border: none;
-	font-family: "Big Shoulders Text", cursive;
+	font-family: "Anton", sans-serif;
 	padding: 9px;
 	letter-spacing: 1px;
 	border-radius: 4px;
@@ -327,6 +267,24 @@ input[type="date"]:focus {
 	border-radius: 50%;
 	padding: 5px;
 	object-fit: cover;
+}
+.profileImage {
+	object-fit: cover;
+}
+.description,
+.userHeader {
+	font-family: "Anton", sans-serif;
+	color: rgb(78, 78, 78);
+}
+.editIcon {
+	color: rgb(15, 141, 120);
+}
+.editIcon:hover {
+	color: rgb(12, 104, 88);
+}
+.smallCard {
+	background-color: black;
+	border: none;
 }
 
 @media screen and (max-width: 329px) {
